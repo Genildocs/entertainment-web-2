@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useContext, useEffect } from 'react';
 import { EntertainmentContext } from '@/app/context/EntertainmentContext';
-const chave = process.env.NEXT_PUBLIC_API_KEY;
+
 export default function InputSearch({ children }) {
   const { movie, serie, setNewMovie, setNewSerie } =
     useContext(EntertainmentContext);
@@ -16,9 +16,7 @@ export default function InputSearch({ children }) {
   useEffect(() => {
     const filterSearch = async (filter) => {
       try {
-        const res = await fetch(
-          `https://www.omdbapi.com/?apikey=${chave}&s=${filter}`
-        );
+        const res = await fetch(`api/filter?filter=${filter}`);
         const data = await res.json();
 
         if (data.Response === 'True') {
