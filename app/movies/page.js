@@ -9,12 +9,13 @@ export default function Movies() {
   return (
     <div>
       <InputSearch>Search for movies</InputSearch>
+      <h1 className="text-white font-light text-2xl pl-5">Movies</h1>
       <div className="systemGrid p-5">
         {newMovie.map((el) => (
           <div key={el.imdbID}>
             <div>
               <Image
-                src={`${el.Poster.replace('url', '')}`}
+                src={`${el.Poster}`}
                 alt={el.Title}
                 width={220}
                 height={140}

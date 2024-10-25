@@ -18,7 +18,7 @@ const EntertainmentProvider = ({ children }) => {
           `https://www.omdbapi.com/?s=${type}&type=${type}&apikey=${chave} `
         );
         const data = await res.json();
-        console.log(data);
+
         const { Search } = data;
         const newData = Search.map((el, idx) => {
           return { ...el, isBookmarked: false, isTrending: true };

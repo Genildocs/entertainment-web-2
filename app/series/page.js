@@ -9,11 +9,12 @@ export default function Series() {
   return (
     <div>
       <InputSearch>Search for TV Series</InputSearch>
+      <h1 className="text-white font-light text-2xl pl-5">TV Series</h1>
       <div className="systemGrid p-5">
         {newSerie.map((el) => (
           <div key={el.imdbID}>
             <div>
-              <img
+              <Image
                 src={`${el.Poster}`}
                 alt={el.Title}
                 width={220}

@@ -46,10 +46,10 @@ export default function InputSearch({ children }) {
     if (search !== '') {
       filterSearch(search);
     }
-  }, [search, setNewMovie]);
+  }, [search, setNewMovie, setNewSerie]);
 
   return (
-    <div>
+    <div className="pl-5 my-5">
       <input
         type="text"
         placeholder={children}
