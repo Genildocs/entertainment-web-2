@@ -15,7 +15,6 @@ const EntertainmentProvider = ({ children }) => {
         setIsLoading(true);
         const res = await fetch(`api/search?type=${type}`);
         const data = await res.json();
-
         const { Search } = data;
         const newData = Search.map((el, idx) => {
           return { ...el, isBookmarked: false, isTrending: true };
