@@ -1,7 +1,6 @@
 'use client';
 import { useState, useEffect, createContext, Children } from 'react';
 const EntertainmentContext = createContext();
-const chave = process.env.NEXT_PUBLIC_API_KEY;
 
 const EntertainmentProvider = ({ children }) => {
   const [movie, setMovies] = useState([]);
@@ -14,9 +13,7 @@ const EntertainmentProvider = ({ children }) => {
     const getAll = async (type, setter) => {
       try {
         setIsLoading(true);
-        const res = await fetch(
-          `https://www.omdbapi.com/?s=${type}&type=${type}&apikey=${chave}`
-        );
+        const res = await fetch(`api/search?type=${type}`);
         const data = await res.json();
 
         const { Search } = data;
