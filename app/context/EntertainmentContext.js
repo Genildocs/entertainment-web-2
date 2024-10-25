@@ -15,7 +15,7 @@ const EntertainmentProvider = ({ children }) => {
       try {
         setIsLoading(true);
         const res = await fetch(
-          `https://www.omdbapi.com/?s=${type}&type=${type}&apikey=${chave} `
+          `https://www.omdbapi.com/?s=${type}&type=${type}&apikey=${chave}`
         );
         const data = await res.json();
 
