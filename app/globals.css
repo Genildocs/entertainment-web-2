@@ -10,4 +10,76 @@ body {
   .systemGrid {
     @apply grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-5 md:grid-cols-4 auto-rows-min;
   }
+
+  /* Loading */
+
+  .loader {
+    width: 40px;
+    aspect-ratio: 0.577;
+    clip-path: polygon(0 0, 100% 100%, 0 100%, 100% 0);
+    position: relative;
+    animation: l19 2s infinite linear;
+    overflow: hidden;
+  }
+  .loader:before {
+    content: '';
+    position: absolute;
+    inset: -150% -150%;
+    background: repeating-conic-gradient(
+      from 30deg,
+      #ffabab 0 60deg,
+      #abe4ff 0 120deg,
+      #ff7373 0 180deg
+    );
+    animation: inherit;
+    animation-direction: reverse;
+  }
+  @keyframes l19 {
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Loading images */
+  /* HTML: <div class="loader"></div> */
+  .loaderImages {
+    width: 40px;
+    aspect-ratio: 1;
+    color: #f03355;
+    background: conic-gradient(currentColor 0 270deg, #0000 0);
+    border-radius: 50%;
+    animation: l14-0 4s infinite linear;
+  }
+  .loaderImages::before {
+    content: '';
+    display: block;
+    height: 50%;
+    width: 50%;
+    border-top-left-radius: 100px;
+    background: currentColor;
+    animation: l14 0.5s infinite alternate;
+  }
+  @keyframes l14-0 {
+    0%,
+    24.99% {
+      transform: rotate(0deg);
+    }
+    25%,
+    49.99% {
+      transform: rotate(90deg);
+    }
+    50%,
+    74.99% {
+      transform: rotate(180deg);
+    }
+    75%,
+    100% {
+      transform: rotate(270deg);
+    }
+  }
+  @keyframes l14 {
+    100% {
+      transform: translate(-10px, -10px);
+    }
+  }
 }
