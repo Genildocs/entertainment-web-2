@@ -9,6 +9,8 @@ const EntertainmentProvider = ({ children }) => {
   const [erro, setErro] = useState('');
   const [newMovie, setNewMovie] = useState([]);
   const [newSerie, setNewSerie] = useState([]);
+  const [id, setId] = useState('');
+
   useEffect(() => {
     const getAll = async (type, setter) => {
       try {
@@ -49,6 +51,8 @@ const EntertainmentProvider = ({ children }) => {
         setNewMovie,
         newSerie,
         setNewSerie,
+        setId,
+        id,
       }}>
       {children}
     </EntertainmentContext.Provider>

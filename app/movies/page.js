@@ -1,12 +1,19 @@
 'use client';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import InputSearch from '@/components/InputSearch';
 import { EntertainmentContext } from '../context/EntertainmentContext';
 import Image from 'next/image';
 import Loading from '@/components/Loading';
 import Movie from '@/public/icon-nav-movies.svg';
+import Link from 'next/link';
+
 export default function Movies() {
-  const { newMovie, setNewMovie, isLoading } = useContext(EntertainmentContext);
+  const { newMovie, setNewMovie, isLoading, setId } =
+    useContext(EntertainmentContext);
+
+  const handleId = (id) => {
+    setId(id);
+  };
 
   return (
     <div>
@@ -15,20 +22,22 @@ export default function Movies() {
       {isLoading ? (
         <Loading />
       ) : (
-        <div className="systemGrid p-5">
-          {newMovie.map((el) => (
-            <div key={el.imdbID}>
-              <div>
+        <div className="systemGrid p-4">
+          {newMovie.map((el, idx) => (
+            <div
+              key={el.imdbID}
+              className="flex flex-col p-3 bg-blue-950 rounded-lg cursor-pointer">
+              <div className="h-full">
                 <Image
                   src={`${el.Poster}`}
                   alt={el.Title}
                   width={220}
                   height={140}
-                  className="rounded-md object-cover h-[250px]"
+                  className="rounded-md h-full  w-full"
                 />
               </div>
               <div className="flex flex-col justify-between text-white">
-                <div className="mt-2 flex items-center  bg-blue-600 mb-2 p-1 ">
+                <div className="mt-2 flex items-center justify-center gap-5 bg-blue-600 mb-2 p-1 rounded-md ">
                   <Image
                     src={Movie}
                     alt="icon nav-movie"
@@ -38,10 +47,18 @@ export default function Movies() {
                   <h2>{el.Title.replaceAll('Movie', '')}</h2>
                 </div>
                 <div>
-                  <p className="bg-blue-600 p-1 text-center mb-2">
+                  <p className="bg-blue-600 p-1 text-center mb-2 rounded-md">
                     Type: {el.Type === 'movie' && 'Movie'}
                   </p>
-                  <p className="bg-blue-600 p-1 text-center">Year: {el.Year}</p>
+                  <p className="bg-blue-600 p-1 text-center rounded-md">
+                    Year: {el.Year}
+                  </p>
+                  <Link
+                    href={`/details`}
+                    className="block  p-1 text-center rounded-md mt-2 w-full"
+                    onClick={() => handleId(el.imdbID)}>
+                    Details
+                  </Link>
                 </div>
               </div>
             </div>

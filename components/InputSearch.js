@@ -1,7 +1,7 @@
 'use client';
 import React, { useState, useContext, useEffect } from 'react';
 import { EntertainmentContext } from '@/app/context/EntertainmentContext';
-
+import { IoIosSearch } from 'react-icons/io';
 export default function InputSearch({ children }) {
   const { movie, serie, setNewMovie, setNewSerie } =
     useContext(EntertainmentContext);
@@ -26,6 +26,7 @@ export default function InputSearch({ children }) {
           }).map((el) => {
             return { ...el, isBookmarked: false, isTrending: true };
           });
+
           setNewMovie(searchMovie);
 
           const searchSerie = Search.filter((el) => {
@@ -47,11 +48,12 @@ export default function InputSearch({ children }) {
   }, [search, setNewMovie, setNewSerie]);
 
   return (
-    <div className="pl-5 my-5">
+    <div className="pl-5 my-5 flex items-center gap-2 ">
+      <IoIosSearch className="h-6 w-6 fill-white cursor-pointer" />
       <input
         type="text"
         placeholder={children}
-        className="w-full bg-transparent text-white outline-none"
+        className="w-1/2 bg-transparent text-white outline-none border-b-[1px] cursor-pointer"
         value={search}
         onChange={handleSearch}
       />
