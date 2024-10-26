@@ -38,7 +38,7 @@ export default function Movies() {
         <div className="systemGrid p-4">
           {newMovie.map((el, idx) => (
             <div
-              key={el.imdbID}
+              key={idx}
               className="flex flex-col p-3 bg-blue-950 rounded-lg ">
               <div className="h-full flex items-center justify-center">
                 {loadingImages[el.imdbID] && (

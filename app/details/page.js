@@ -10,7 +10,6 @@ export default function Details() {
   const [error, setError] = useState(null); // Armazena erros
   const [loading, setLoading] = useState(false);
 
-  console.log(details);
   useEffect(() => {
     const getDetails = async () => {
       try {

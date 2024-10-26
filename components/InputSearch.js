@@ -53,7 +53,7 @@ export default function InputSearch({ children }) {
       <input
         type="text"
         placeholder={children}
-        className="w-1/2 bg-transparent text-white outline-none border-b-[1px] cursor-pointer"
+        className="w-3/4 bg-transparent text-white outline-none border-b-[1px] cursor-pointer"
         value={search}
         onChange={handleSearch}
       />
