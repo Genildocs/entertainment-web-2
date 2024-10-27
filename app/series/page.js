@@ -8,22 +8,16 @@ import Loading from '@/components/Loading';
 export default function Series() {
   const { newSerie, setNewSerie, setId } = useContext(EntertainmentContext);
 
-  const handleId = (id) => {
-    setId(id);
-  };
-
   return (
     <div>
       <InputSearch>Search for TV Series</InputSearch>
-      <h1 className="text-white font-light text-2xl pl-5 sm:ml-5">TV Series</h1>
+      <h1 className="headingPages">TV Series</h1>
       {newSerie.length === 0 ? (
         <Loading />
       ) : (
-        <div className="systemGrid p-4">
+        <div className="systemGrid">
           {newSerie.map((el) => (
-            <div
-              key={el.imdbID}
-              className="flex flex-col p-3 bg-blue-950 rounded-lg">
+            <div key={el.imdbID} className="mapPages">
               <div className="h-full">
                 <Image
                   src={`${el.Poster}`}

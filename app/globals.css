@@ -11,6 +11,14 @@ body {
     @apply grid grid-cols-1 xs:grid-cols-2 sm:grid-cols-3 gap-x-5 gap-y-5 md:grid-cols-4 auto-rows-min p-4 sm:mx-5;
   }
 
+  .headingPages {
+    @apply text-white font-light text-2xl pl-5 sm:ml-5;
+  }
+
+  .mapPages {
+    @apply flex flex-col p-3 bg-blue-950 rounded-lg;
+  }
+
   /* Loading */
 
   .loader {

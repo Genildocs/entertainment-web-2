@@ -5,42 +5,21 @@ import { EntertainmentContext } from './context/EntertainmentContext';
 import Image from 'next/image';
 import Link from 'next/link';
 import Loading from '@/components/Loading';
-
+import Trending from '@/components/Trending';
+import defaultImage from '@/public/no-image.jpg';
 export default function Home() {
   const { newMovie, newSerie, setId } = useContext(EntertainmentContext);
   const [list, setList] = useState([]);
-  const [loadingImages, setLoadingImages] = useState({});
-
-  const handleId = (id) => {
-    setId(id);
-  };
 
   useEffect(() => {
     setList([...newMovie, ...newSerie]);
   }, [newMovie, newSerie]);
 
-  const handleImagesLoad = (id) => {
-    setLoadingImages((prev) => ({ ...prev, [id]: false }));
-  };
-
-  useEffect(() => {
-    const initialState = list.reduce((acc, el) => {
-      acc[el.imdbID] = true;
-      return acc;
-    }, {});
-    setLoadingImages(initialState);
-
-    const handler = setTimeout(() => {
-      setLoadingImages(initialState);
-      console.log('executado');
-    }, 500);
-
-    return () => clearTimeout(handler);
-  }, []);
-
   return (
     <div className="sm:mx-5">
       <InputSearch>Search for movies or TV series</InputSearch>
+      <h1 className="text-white font-light text-2xl pl-5">Trending</h1>
+      <Trending />
       <h1 className="text-white font-light text-2xl pl-5">
         Recommended for you
       </h1>
@@ -53,16 +32,12 @@ export default function Home() {
               key={idx}
               className="flex flex-col p-3 bg-blue-950 rounded-lg ">
               <div className="h-full flex items-center justify-center">
-                {loadingImages[el.imdbID] && (
-                  <div className="loaderImages "></div>
-                )}
                 <Image
-                  src={`${el.Poster}`}
+                  src={`${el.Poster !== 'N/A' ? el.Poster : defaultImage}`}
                   alt={el.Title}
                   width={220}
                   height={140}
-                  className={`rounded-md h-full  w-full ${loadingImages[el.imdbID] ? 'hidden' : ''}`}
-                  onLoad={() => handleImagesLoad(el.imdbID)}
+                  className={`rounded-md h-full  w-full `}
                 />
               </div>
               <div className="flex flex-col justify-between text-white">

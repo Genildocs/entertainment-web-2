@@ -10,48 +10,24 @@ import Link from 'next/link';
 export default function Movies() {
   const { newMovie, setNewMovie, isLoading, setId } =
     useContext(EntertainmentContext);
-  const [loadingImages, setLoadingImages] = useState({});
-  console.log(loadingImages);
-  const handleId = (id) => {
-    setId(id);
-  };
-
-  const handleImagesLoad = (id) => {
-    setLoadingImages((prev) => ({ ...prev, [id]: false }));
-  };
-
-  useEffect(() => {
-    const initialState = newMovie.reduce((acc, el) => {
-      acc[el.imdbID] = true;
-      return acc;
-    }, {});
-
-    setLoadingImages(initialState);
-  }, [newMovie]);
 
   return (
     <div>
       <InputSearch>Search for movies</InputSearch>
-      <h1 className="text-white font-light text-2xl pl-5 sm:ml-5">Movies</h1>
+      <h1 className="headingPages">Movies</h1>
       {newMovie.length === 0 ? (
         <Loading />
       ) : (
-        <div className="systemGrid p-4">
+        <div className="systemGrid ">
           {newMovie.map((el, idx) => (
-            <div
-              key={idx}
-              className="flex flex-col p-3 bg-blue-950 rounded-lg ">
+            <div key={idx} className="mapPages ">
               <div className="h-full flex items-center justify-center">
-                {loadingImages[el.imdbID] && (
-                  <div className="loaderImages w-[1/2]"></div>
-                )}
-                <Image
+                <img
                   src={`${el.Poster}`}
                   alt={el.Title}
                   width={220}
                   height={140}
-                  className={`rounded-md h-full  w-full ${loadingImages[el.imdbID] ? 'hidden' : ''}`}
-                  onLoad={() => handleImagesLoad(el.imdbID)}
+                  className={`rounded-md h-full  w-full `}
                 />
               </div>
               <div className="flex flex-col justify-between text-white">
