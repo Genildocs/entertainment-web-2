@@ -11,7 +11,7 @@ export default function Movies() {
   const { newMovie, setNewMovie, isLoading, setId } =
     useContext(EntertainmentContext);
   const [loadingImages, setLoadingImages] = useState({});
-
+  console.log(loadingImages);
   const handleId = (id) => {
     setId(id);
   };
@@ -25,13 +25,14 @@ export default function Movies() {
       acc[el.imdbID] = true;
       return acc;
     }, {});
+
     setLoadingImages(initialState);
   }, [newMovie]);
 
   return (
     <div>
       <InputSearch>Search for movies</InputSearch>
-      <h1 className="text-white font-light text-2xl pl-5">Movies</h1>
+      <h1 className="text-white font-light text-2xl pl-5 sm:ml-5">Movies</h1>
       {newMovie.length === 0 ? (
         <Loading />
       ) : (
@@ -65,7 +66,7 @@ export default function Movies() {
                     Year: {el.Year}
                   </p>
                   <Link
-                    href={`/details`}
+                    href={`/details?${el.Title}&id=${el.imdbID}`}
                     className="block  p-1 text-center rounded-md mt-2 w-full"
                     onClick={() => handleId(el.imdbID)}>
                     + Details

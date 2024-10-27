@@ -15,7 +15,7 @@ export default function Series() {
   return (
     <div>
       <InputSearch>Search for TV Series</InputSearch>
-      <h1 className="text-white font-light text-2xl pl-5">TV Series</h1>
+      <h1 className="text-white font-light text-2xl pl-5 sm:ml-5">TV Series</h1>
       {newSerie.length === 0 ? (
         <Loading />
       ) : (
@@ -41,7 +41,7 @@ export default function Series() {
                   <p className="bg-blue-600 p-1 text-center mb-2">{el.Type}</p>
                   <p className="bg-blue-600 p-1 text-center mb-2">{el.Year}</p>
                   <Link
-                    href={'/details'}
+                    href={`/details?${el.Title}&id=${el.imdbID}`}
                     className="block  p-1 text-center rounded-md mt-2 w-full"
                     onClick={() => handleId(el.imdbID)}>
                     + Details

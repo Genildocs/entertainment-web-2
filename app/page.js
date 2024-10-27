@@ -29,10 +29,17 @@ export default function Home() {
       return acc;
     }, {});
     setLoadingImages(initialState);
+
+    const handler = setTimeout(() => {
+      setLoadingImages(initialState);
+      console.log('executado');
+    }, 500);
+
+    return () => clearTimeout(handler);
   }, []);
 
   return (
-    <div>
+    <div className="sm:mx-5">
       <InputSearch>Search for movies or TV series</InputSearch>
       <h1 className="text-white font-light text-2xl pl-5">
         Recommended for you
@@ -40,7 +47,7 @@ export default function Home() {
       {list.length === 0 ? (
         <Loading />
       ) : (
-        <div className="systemGrid p-4">
+        <div className="systemGrid ">
           {list.map((el, idx) => (
             <div
               key={idx}
@@ -70,7 +77,7 @@ export default function Home() {
                     Year: {el.Year}
                   </p>
                   <Link
-                    href={`/details`}
+                    href={`/details?${el.Title}&id=${el.imdbID}`}
                     className="block  p-1 text-center rounded-md mt-2 w-full"
                     onClick={() => handleId(el.imdbID)}>
                     + Details
