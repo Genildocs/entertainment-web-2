@@ -5,14 +5,7 @@ export default function Trending() {
 
   useEffect(() => {
     async function TrendingDb() {
-      const options = {
-        method: 'GET',
-        headers: {
-          accept: 'application/json',
-          Authorization:
-            'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI1OGQ0MTI2NDI0ODRjNTVhYTM0MmUyNzFhZTU0ZmMxMiIsIm5iZiI6MTcyOTk5OTMzNi4xMjkxODgsInN1YiI6IjY1ZDZlYTlmOTk3NGVlMDE3YjA2NDA1MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.rhLLEsRdHqYu37fiD8r9fz7UBMQ6z_hZQ9vqJZ4d7NU',
-        },
-      };
+     
 
       const res = await fetch(
         'https://api.themoviedb.org/3/trending/movie/day?language=en-US',
