@@ -2,17 +2,24 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Loading from '@/components/Loading';
+import { useRouter } from 'next/compat/router';
 import { useSearchParams } from 'next/navigation';
 import defaultImage from '@/public/no-image.jpg';
 
 export default function Details() {
-  const router = useSearchParams(); //Busca um valor em uma url com base no valor que vc passar.
-  const id = router.get('id');
+  const router = useRouter(); //Busca um valor em uma url com base no valor que vc passar.
+  const searchParams = useSearchParams();
   const [details, setDetails] = useState('');
   const [error, setError] = useState(null); // Armazena erros
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
+    if (router && !router.isReady) {
+      return;
+    }
+
+    const id = searchParams.get('id');
+
     const getDetails = async () => {
       try {
         setError(null);
@@ -31,7 +38,7 @@ export default function Details() {
       }
     };
     getDetails();
-  }, [id]);
+  }, [router, searchParams]);
 
   return (
     <div className="sm:mx-5">
