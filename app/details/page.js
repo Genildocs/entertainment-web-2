@@ -5,6 +5,7 @@ import Loading from '@/components/Loading';
 import { useRouter } from 'next/compat/router';
 import { useSearchParams } from 'next/navigation';
 import defaultImage from '@/public/no-image.jpg';
+import { Suspense } from 'react';
 
 export default function Details() {
   const router = useRouter(); //Busca um valor em uma url com base no valor que vc passar.
@@ -18,13 +19,17 @@ export default function Details() {
       return;
     }
 
-    const id = searchParams.get('id');
+    const handleRouteChange = () => {
+      const id = searchParams.get('id');
+      return id;
+    };
+    <Suspense>handleRouteChange()</Suspense>;
 
     const getDetails = async () => {
       try {
         setError(null);
         setLoading(true); // Inicia o loading
-        const res = await fetch(`api/details?id=${id}`);
+        const res = await fetch(`api/details?id=${handleRouteChange()}`);
         if (!res.ok) {
           throw new Error('Filme não encontrado ou erro na API');
         }
