@@ -2,34 +2,23 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Loading from '@/components/Loading';
-import { useRouter } from 'next/compat/router';
 import { useSearchParams } from 'next/navigation';
 import defaultImage from '@/public/no-image.jpg';
 import { Suspense } from 'react';
 
-export default function Details() {
-  const router = useRouter(); //Busca um valor em uma url com base no valor que vc passar.
+function DetailsComponent() {
   const searchParams = useSearchParams();
+  const id = searchParams.get('id');
   const [details, setDetails] = useState('');
   const [error, setError] = useState(null); // Armazena erros
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (router && !router.isReady) {
-      return;
-    }
-
-    const handleRouteChange = () => {
-      const id = searchParams.get('id');
-      return id;
-    };
-    <Suspense>handleRouteChange()</Suspense>;
-
     const getDetails = async () => {
       try {
         setError(null);
         setLoading(true); // Inicia o loading
-        const res = await fetch(`api/details?id=${handleRouteChange()}`);
+        const res = await fetch(`api/details?id=${id}`);
         if (!res.ok) {
           throw new Error('Filme não encontrado ou erro na API');
         }
@@ -43,7 +32,7 @@ export default function Details() {
       }
     };
     getDetails();
-  }, [router, searchParams]);
+  }, [id]);
 
   return (
     <div className="sm:mx-5">
@@ -94,5 +83,13 @@ export default function Details() {
         </div>
       )}
     </div>
+  );
+}
+
+export default function Details() {
+  return (
+    <Suspense fallback={<Loading />}>
+      <DetailsComponent />
+    </Suspense>
   );
 }
