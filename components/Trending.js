@@ -8,6 +8,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
 import Image from 'next/image';
 import Loading from './Loading';
+import Error from 'next/error';
 export default function Trending() {
   const [trending, setTrending] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
@@ -32,7 +33,7 @@ export default function Trending() {
 
   return (
     <div className="pl-5 mt-3 mb-10 sm:mx-5 relative ">
-      {trending.length !== 0 && (
+      {trending.length !== 0 ? (
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           loop={true}
@@ -54,6 +55,8 @@ export default function Trending() {
             </SwiperSlide>
           ))}
         </Swiper>
+      ) : (
+        <Error statusCode={404} />
       )}
     </div>
   );
