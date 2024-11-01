@@ -31,7 +31,7 @@ export default function Trending() {
 
   return (
     <div className="pl-5 mt-3 mb-10 sm:mx-5 relative ">
-      {trending !== undefined && trending.length !== 0 && (
+      {trending !== undefined && trending.length !== 0 ? (
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           loop={true}
@@ -53,6 +53,8 @@ export default function Trending() {
             </SwiperSlide>
           ))}
         </Swiper>
+      ) : (
+        <p>Erro 404 not found</p>
       )}
     </div>
   );
