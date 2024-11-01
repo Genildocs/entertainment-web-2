@@ -15,9 +15,16 @@ export default function Trending() {
       const data = await res.json();
       const { results } = data;
       setTrending(results);
+
+      // Após a promessa ser cumprida, aguarda 45 segundos antes de chamar a função novamente
+      setTimeout(TrendingDb, 45000);
     }
 
-    TrendingDb();
+    // Inicia a chamada com um atraso inicial de 45 segundos
+    const timeoutId = setTimeout(TrendingDb, 45000);
+
+    // Limpa o timeout se o componente for desmontado
+    return () => clearTimeout(timeoutId);
   }, []);
 
   return (
