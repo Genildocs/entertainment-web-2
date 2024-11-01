@@ -12,7 +12,7 @@ export async function GET(request) {
 
   try {
     const res = await fetch(
-      'https://api.themoviedb.org/3/trending/movie/week?language=en-US',
+      'https://api.themoviedb.org/3/trending/all/week?language=en-US',
       options
     );
     const data = await res.json();

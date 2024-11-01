@@ -25,7 +25,7 @@ body {
   /* Loading */
 
   .loader {
-    width: 40px;
+    width: 25px;
     aspect-ratio: 0.577;
     clip-path: polygon(0 0, 100% 100%, 0 100%, 100% 0);
     position: relative;
