@@ -16,9 +16,12 @@ body {
   }
 
   .mapPages {
-    @apply flex flex-col p-3 bg-blue-950 rounded-lg;
+    @apply flex flex-col p-3 bg-black;
   }
 
+  .borderImages {
+    @apply border-[10px] border-solid border-white;
+  }
   /* Loading */
 
   .loader {
