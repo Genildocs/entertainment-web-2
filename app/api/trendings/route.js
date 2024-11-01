@@ -1,12 +1,12 @@
 import { NextResponse } from 'next/server';
 
 export async function GET(request) {
-  const tokenTmb = process.env.NEXT_PUBLIC_TMDB_API_KEY;
+  const tokenTmb = process.env.NEXT_PUBLIC_TOKEN_TDB;
   const options = {
     method: 'GET',
     headers: {
       accept: 'application/json',
-      Authorization: `Bearer ${tokenTmb}`,
+      Authorization: `${tokenTmb}`,
     },
   };
 
