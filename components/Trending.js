@@ -8,7 +8,7 @@ import 'swiper/css/scrollbar';
 import Image from 'next/image';
 export default function Trending() {
   const [trending, setTrending] = useState([]);
-  console.log(trending !== undefined && trending.length !== 0);
+  const [error, setError] = useState(null);
   useEffect(() => {
     async function TrendingDb() {
       try {
@@ -23,6 +23,7 @@ export default function Trending() {
         setTrending(results);
       } catch (error) {
         console.error('Erro ao buscar os dados:', error);
+        setError(error.message);
       }
     }
 
@@ -54,7 +55,7 @@ export default function Trending() {
           ))}
         </Swiper>
       ) : (
-        <p>Erro 404 not found</p>
+        <p className="text-white">{error}</p>
       )}
     </div>
   );
