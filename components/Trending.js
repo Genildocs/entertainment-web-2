@@ -11,7 +11,7 @@ import Loading from './Loading';
 export default function Trending() {
   const [trending, setTrending] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  console.log(isLoading);
+  console.log(trending);
   useEffect(() => {
     async function TrendingDb() {
       try {
@@ -32,9 +32,7 @@ export default function Trending() {
 
   return (
     <div className="pl-5 mt-3 mb-10 sm:mx-5 relative ">
-      {trending.length === 0 ? (
-        <Loading />
-      ) : (
+      {trending.length !== 0 && (
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           loop={true}
