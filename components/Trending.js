@@ -8,28 +8,30 @@ import 'swiper/css/scrollbar';
 import Image from 'next/image';
 export default function Trending() {
   const [trending, setTrending] = useState([]);
-  console.log(trending);
+  console.log(trending !== undefined && trending.length !== 0);
   useEffect(() => {
     async function TrendingDb() {
-      const res = await fetch('api/trendings');
-      const data = await res.json();
-      const { results } = data;
-      setTrending(results);
+      try {
+        // Aguarda a resposta da API
+        const res = await fetch('api/trendings');
+        if (!res.ok) throw new Error('Erro ao buscar dados');
 
-      // Após a promessa ser cumprida, aguarda 45 segundos antes de chamar a função novamente
-      setTimeout(TrendingDb, 45000);
+        const data = await res.json();
+        const { results } = data;
+
+        // Atualiza o estado após a promessa ser cumprida
+        setTrending(results);
+      } catch (error) {
+        console.error('Erro ao buscar os dados:', error);
+      }
     }
 
-    // Inicia a chamada com um atraso inicial de 45 segundos
-    const timeoutId = setTimeout(TrendingDb, 45000);
-
-    // Limpa o timeout se o componente for desmontado
-    return () => clearTimeout(timeoutId);
+    TrendingDb();
   }, []);
 
   return (
     <div className="pl-5 mt-3 mb-10 sm:mx-5 relative ">
-      {trending.length !== 0 && (
+      {trending !== undefined && trending.length !== 0 && (
         <Swiper
           modules={[Navigation, Pagination, Scrollbar, A11y]}
           loop={true}
