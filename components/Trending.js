@@ -14,7 +14,7 @@ export default function Trending() {
       try {
         // Aguarda a resposta da API
         const res = await fetch('api/trendings');
-        if (!res.ok) throw new Error('Erro ao buscar dados');
+        if (!success) throw new Error('Erro ao buscar dados');
 
         const data = await res.json();
         const { results } = data;
